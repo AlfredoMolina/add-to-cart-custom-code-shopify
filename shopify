@@ -1,0 +1,95 @@
+<style>
+  
+  .product-item__quick-buy-button{
+    display:none !important;
+  }
+.button-wrapperr {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center; 
+  width: 100%;
+  font-weight: none!important;
+}
+.button-tag {
+  color: #000;
+  border: 1px solid #000; 
+  font-size: 10px; 
+  text-transform: uppercase;
+  padding: 8px; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  border-radius: 5px; 
+  background: none;
+}
+.button-tag:hover {
+  color: gray;
+}
+#tag-2 {
+  border: 1px solid #5F8575!important; 
+}
+ .button-tag, .button-tag select {
+  color: #000;
+  border: 1px solid #000;
+  font-size:9px;
+ 
+  text-transform: uppercase;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  background: none;
+}
+
+.button-tag:hover, .button-tag select:hover {
+  color: gray;
+  background: #f8f8f8; 
+}
+
+
+select.button-tag {
+  appearance: none; 
+  background-color: transparent;
+  align-items: center;
+  display: inline-block;
+  position: relative;
+}
+
+select.button-tag::-ms-expand {
+  display: none; 
+}
+
+
+select.button-tag:after {
+  content: "▼";
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .button-tag, .button-tag select {
+    font-size: 15px; 
+  }
+}
+
+</style>
+
+  
+<div class="button-wrapperr">
+  <form method="post" action="/cart/add" style="margin: 0; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <!-- Hidden input for product ID -->
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+
+
+    <select name="id" class="button-tag select-small" required onchange="expandSelectBox(this);">
+      <option value="" disabled selected>Size</option>
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}">{{ variant.title }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit" class="button-tag">Add +</button>
+  </form>
+</div>
